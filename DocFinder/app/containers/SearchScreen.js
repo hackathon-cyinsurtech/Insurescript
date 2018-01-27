@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
@@ -30,10 +30,17 @@ class SearchScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Feeling down? :(</Text>
-        <Text>Describe your symptoms below and we'll try to find an appropriate healthcare professional to help!</Text>
-        <TextInput style={styles.searchBox} onChange={this.handleTextUpdate.bind(this)} value={this.state.currentText}/>
-        <Button title="Search" onPress={this.handleSearchClick.bind(this)} />
+        <View style={styles.header}>
+          <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>Are you feeling a bit meh?</Text>
+          <Text style={{fontSize: 14, fontWeight: '100'}}>No problem lets find you a specialist!</Text>
+        </View>
+        <View style={styles.searchContainer}>
+          <TextInput style={styles.searchBox} onChange={this.handleTextUpdate.bind(this)} value={this.state.currentText}/>
+          <Text style={{fontSize: 12, fontWeight: '300'}}>* type comma separated symptoms</Text>
+          <TouchableOpacity style={styles.searchButton} onPress={this.handleSearchClick.bind(this)}>
+            <Text style={{fontSize: 18, color: '#fff'}}>Find me a specialist</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -42,19 +49,30 @@ class SearchScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fafafa',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   header: {
-    alignSelf: 'flex-start',
-    color: 'blue',
-    fontSize: 34,
-    marginTop: 50
+    flex: 1,
+    marginTop: 50,
+    alignItems: 'center',
+    padding: 30
+  },
+  searchContainer: {
+    flex: 2
   },
   searchBox: {
     backgroundColor: '#fff',
     width: 300,
-    height: 30
+    fontSize: 18,
+    height: 50
+  },
+  searchButton: {
+    backgroundColor: '#007AFF',
+    padding: 20,
+    marginTop: 100,
+    alignItems: 'center',
   }
 });
 
