@@ -10,7 +10,7 @@ import { StackNavigator } from 'react-navigation';
 import HomeScreen from './app/containers/HomeScreen'
 import SearchScreen from './app/containers/SearchScreen'
 import SearchResults from './app/containers/SearchResults'
-import * as 'firebase' from 'firebase'
+import * as firebase from 'firebase'
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWDYFao_OwSOfbqE8G8EZQDSAM6BLFogw",
@@ -55,13 +55,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-export const DocStorage {
-  var config = {
-  apiKey: "AIzaSyAWDYFao_OwSOfbqE8G8EZQDSAM6BLFogw",
-  authDomain: "docfinder-16e52.firebaseapp.com",
-  databaseURL: "https://docfinder-16e52.firebaseio.com",
-  projectId: "docfinder-16e52",
-  storageBucket: "docfinder-16e52.appspot.com",
-  messagingSenderId: "986856275247"
-};
