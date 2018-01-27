@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
+import _ from 'lodash'
 
 class SearchScreen extends React.Component {
   static navigationOptions = {
@@ -22,6 +23,13 @@ class SearchScreen extends React.Component {
   }
 
   handleSearchClick() {
+    if (this.state.currentText === '') {
+      return Alert.alert('', 'You need to type at least one symptom')
+    }
+
+    if (_.isEmpty(this.props.retrievedSymptoms)) {
+      return Alert.alert('', 'An error has occured retrieving symptoms')
+    }
     let symptomsList = this.state.currentText.split(',').map(symptom => symptom.replace(/^\s+|\s+$/g, ''));
     this.props.matchSymptoms(symptomsList, this.props.retrievedSymptoms)
     this.props.navigation.navigate('SearchResults')
