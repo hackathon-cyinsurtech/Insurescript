@@ -1,9 +1,15 @@
-import React from 'react';
+import React from 'react'
+import { AppRegistry } from 'react-native'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, combineReducers, compose} from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import reducer from './app/reducers'
+
 import { StyleSheet, Text } from 'react-native'
 import { StackNavigator } from 'react-navigation';
-import HomeScreen from './containers/HomeScreen'
-import SearchScreen from './containers/SearchScreen'
-import SearchResults from './containers/SearchResults'
+import HomeScreen from './app/containers/HomeScreen'
+import SearchScreen from './app/containers/SearchScreen'
+import SearchResults from './app/containers/SearchResults'
 
 export const DocFinder = StackNavigator({
   HomeScreen: { screen: HomeScreen },
@@ -16,16 +22,24 @@ export const DocFinder = StackNavigator({
 
 });
 
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+    ),
+  );
+  return createStore(reducer, initialState, enhancer);
+}
+
+const store = configureStore({
+});
+
 export default class App extends React.Component {
   render() {
-    return <DocFinder />;
+    return (
+      <Provider store={store}>
+        <DocFinder />
+      </Provider>
+    );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
