@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, Image, PickerIOS, Text, Button } from 'react-native'
+import { StyleSheet, View, Image, PickerIOS, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import Logo from '../images/logo.png'
+import SelectInput from 'react-native-select-input-ios';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -23,8 +24,19 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate('SearchScreen')
   }
 
+  onSubmitSex(value) {
+    this.setState({sex: value})
+  }
+
   componentDidMount() {
     this.props.fetchSymptoms();
+  }
+
+  _getSexPickerOptions() {
+    return [
+      { value: 'male', label: 'Male'      },
+      { value: 'female', label: 'Female' }
+    ];
   }
 
   render() {
@@ -33,27 +45,15 @@ class HomeScreen extends React.Component {
         <Image source={Logo} />
         <Text>Hey there!</Text>
         <Text>I just need some quick info!</Text>
-        <PickerIOS
-          key="sex"
+        <SelectInput
+          value={this.state.sex}
+          options={this._getSexPickerOptions()}
+          onSubmitEditing={this.onSubmitSex.bind(this)}
           style={styles.picker}
-          selectedValue={this.state.sex}
-          onValueChange={(itemValue, itemIndex) => this.setState({sex: itemValue})}>
-          <PickerIOS.Item label="Male" value="male" />
-          <PickerIOS.Item label="Female" value="female" />
-        </PickerIOS>
-        <PickerIOS
-          key="age"
-          style={styles.picker}
-          selectedValue={this.state.age}
-          onValueChange={(itemValue, itemIndex) => this.setState({age: itemValue})}>
-            <PickerIOS.Item label="<18" value="18" />
-            {() => {
-              for(i=19; i < 100; i++) {
-                return <PickerIOS.Item key={label={i} value={i}} />
-              }
-            }}
-        </PickerIOS>
-        <Button style={styles.button} title="Diagnose me" onPress={this.navigateToSearch.bind(this)} />
+        />
+        <TouchableOpacity style={styles.button} onPress={this.navigateToSearch.bind(this)}>
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -68,12 +68,24 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    backgroundColor: 'blue'
+    padding: 20,
+    paddingLeft: 40,
+    paddingRight: 40,
+    borderRadius: 5,
+    backgroundColor: '#007AFF'
+  },
+  buttonText: {
+    color: '#fff'
   },
   picker: {
-    width: 200,
-    height: 30
-  }
+    flexDirection:            'row',
+      height:                   36,
+      width: 200,
+      borderWidth:              1,
+      borderRadius:             5,
+      padding:                  20,
+      marginTop:                20,
+      backgroundColor:          '#FFFFFF',  }
 });
 
 function mapStateToProps(state) {
