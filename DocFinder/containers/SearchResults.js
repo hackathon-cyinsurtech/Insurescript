@@ -1,10 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native'
 
-export default class SearchScreen extends React.Component {
+export default class SearchResults extends React.Component {
   static navigationOptions = {
-    title: 'SearchScreen',
-    header: null
+    title: 'SearchScreen'
   };
 
   handleSearchClick() {
@@ -14,10 +13,8 @@ export default class SearchScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Feeling down? :(</Text>
-        <Text>Describe your symptoms below and we'll try to find an appropriate healthcare professional to help!</Text>
-        <TextInput style={styles.searchBox}/>
-        <Button title="Search" onPress={this.handleSearchClick.bind(this)} />
+        <Text>You have cancer</Text>
+        <Text>Dr. Fankenstein is your nearest doctor</Text>
       </View>
     )
   }

@@ -3,10 +3,12 @@ import { StyleSheet, Text } from 'react-native'
 import { StackNavigator } from 'react-navigation';
 import HomeScreen from './containers/HomeScreen'
 import SearchScreen from './containers/SearchScreen'
+import SearchResults from './containers/SearchResults'
 
 export const DocFinder = StackNavigator({
   HomeScreen: { screen: HomeScreen },
-  SearchScreen: { screen: SearchScreen }
+  SearchScreen: { screen: SearchScreen },
+  SearchResults: { screen: SearchResults }
 },
 {
   headerMode: 'float',
