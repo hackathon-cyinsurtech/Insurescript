@@ -11,9 +11,11 @@ export function fetchSymptoms() {
   }
 }
 
-export function fetchDiagnosis() {
+export function fetchDiagnosis(selectedSymptoms, gender, yearOfBirth) {
+  let symptoms = selectedSymptoms.split(',');
+  let url = `${this.config.getAPIURL()}/diagnosis/specialisations?symptoms=` + JSON.stringify(symptoms) + `&gender=${gender}&year_of_birth=${yearOfBirth}`;
   return (dispatch, getState) => {
-    return Api.get(`/diagnosis/specialisations${}`).then(resp => {
+    return Api.get(url).then(resp => {
       dispatch(setRetrievedDiagnosis({diagnosis: resp}));
     }).catch( (ex) => {
       console.log(ex);
