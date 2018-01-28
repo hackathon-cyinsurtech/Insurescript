@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128102738) do
+ActiveRecord::Schema.define(version: 20180128114545) do
 
   create_table "doctors", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "telephone"
-    t.string "latitude"
-    t.string "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.string "rating"
     t.string "insurance"
     t.string "specialty"
