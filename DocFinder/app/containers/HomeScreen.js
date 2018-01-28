@@ -23,6 +23,7 @@ class HomeScreen extends React.Component {
     }
   }
   navigateToSearch() {
+    this.props.saveDetails({yob: this.state.yob, sex: this.state.sex, insurance: this.state.insurance})
     this.props.navigation.navigate('SearchScreen')
   }
 

@@ -36,6 +36,7 @@ class SearchScreen extends React.Component {
   }
 
   render() {
+    console.log(this.props.userDetails)
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -85,7 +86,9 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
+    userDetails: state.userDetails,
     retrievedSymptoms: state.retrievedSymptoms,
     matchedSymptoms: state.matchedSymptoms,
   };
