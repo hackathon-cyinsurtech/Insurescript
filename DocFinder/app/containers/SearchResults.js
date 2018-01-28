@@ -115,6 +115,7 @@ function mapStateToProps(state) {
     matchedSymptoms: state.matchedSymptoms,
     retrievedDoctors: state.retrievedDoctors,
     matchedDoctors: state.matchedDoctors
+  }
 };
 
 function mapDispatchToProps(dispatch) {
