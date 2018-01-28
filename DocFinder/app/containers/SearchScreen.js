@@ -91,7 +91,7 @@ function mapStateToProps(state) {
   return {
     userDetails: state.userDetails,
     retrievedSymptoms: state.retrievedSymptoms,
-    matchedSymptoms: state.matchedSymptoms
+    matchedSymptoms: state.matchedSymptoms,
     matchedSpecialty: state.matchedSpecialty
   };
 }

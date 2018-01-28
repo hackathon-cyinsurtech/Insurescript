@@ -13,7 +13,7 @@ export function fetchSymptoms() {
 
 export function fetchSpecialty(selectedSymptoms, gender, yearOfBirth) {
   let symptoms = selectedSymptoms.split(',');
-  let url = `${this.config.getAPIURL()}/diagnosis/specialisations?symptoms=` + JSON.stringify(symptoms) + `&gender=${gender}&year_of_birth=${yearOfBirth}`;
+  let url = `diagnosis/specialisations?symptoms=` + JSON.stringify(symptoms) + `&gender=${gender}&year_of_birth=${yearOfBirth}`;
   return (dispatch, getState) => {
     return Api.get(url).then(resp => {
       dispatch(setRetrievedSpecialty({diagnosis: resp}));
