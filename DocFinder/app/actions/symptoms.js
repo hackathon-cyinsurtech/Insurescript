@@ -11,6 +11,17 @@ export function fetchSymptoms() {
   }
 }
 
+export function fetchDiagnosis() {
+  return (dispatch, getState) => {
+    return Api.get(`/diagnosis/specialisations${}`).then(resp => {
+      dispatch(setRetrievedDiagnosis({diagnosis: resp}));
+    }).catch( (ex) => {
+      console.log(ex);
+    });
+  }
+}
+
+
 export function matchSymptoms(userSymptoms, symptomsList) {
   return (dispatch, getState) => {
     let matchedSymptoms = []
@@ -22,6 +33,13 @@ export function matchSymptoms(userSymptoms, symptomsList) {
       })
     })
     setMatchedSymptoms(matchedSymptoms)
+  }
+}
+
+export function setRetrievedDiagnosis( { diagnosis }){
+  return {
+    type: types.SET_RETRIEVED_DIAGNOSIS,
+    diagnosis:
   }
 }
 
