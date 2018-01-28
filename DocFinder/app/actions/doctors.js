@@ -3,7 +3,8 @@ import Api from '../lib/api'
 
 export function fetchDoctors(specialty, insurance, latitude, longitude) {
   return (dispatch, getState) => {
-    return Api.getDoctors(`/doctors?insurance=${insurance}&specialty=${specialty}&latitude=${latitude}&longitude=${longitude}`).then(resp => {
+    return Api.getDoctors(`/doctors?insurance=${insurance}&specialty=${encodeURI(specialty)}&latitude=${latitude}&longitude=${longitude}`).then(resp => {
+      console.log(resp)
       dispatch(setRetrievedDoctors({doctors: resp}));
     }).catch( (ex) => {
       console.log(ex);

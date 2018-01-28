@@ -14,13 +14,6 @@ class SearchResults extends React.Component {
 
   constructor(props) {
     super(props)
-
-
-    this.state = {
-      specialty: 'Cardiology',
-    }
-
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,7 +28,7 @@ class SearchResults extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>You should see a {this.state.specialty}</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>You should see a</Text>
           <Text style={{fontSize: 16, fontWeight: '100'}}>Here are your nearest specialist doctors</Text>
         </View>
         <View style={styles.listContainer}>
@@ -65,6 +58,7 @@ class SearchResults extends React.Component {
          <Text>{this.props.doctor.address}</Text>
          <TouchableOpacity onPress={this.handleDirectionsPress.bind(this)} style={styles.directionsButton}>
            <Text style={{fontSize: 16, color: '#fff', textAlign: 'center'}}>Directions</Text>
+           <Text style={{fontSize: 12, color: '#fff', textAlign: 'center'}}>{this.props.doctor.distance}km</Text>
          </TouchableOpacity>
        </View>
      )
@@ -116,6 +110,7 @@ function mapStateToProps(state) {
   return {
     retrievedSymptoms: state.retrievedSymptoms,
     matchedSymptoms: state.matchedSymptoms,
+    selectedSpecialty: state.selectedSpecialty,
     retrievedDoctors: state.retrievedDoctors,
     matchedDoctors: state.matchedDoctors
   }

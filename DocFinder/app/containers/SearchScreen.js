@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, TextInput, Alert } from 'reac
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
+import Api from '../lib/api'
 import _ from 'lodash'
 
 class SearchScreen extends React.Component {
@@ -32,14 +33,28 @@ class SearchScreen extends React.Component {
     }
     let symptomsList = this.state.currentText.split(',').map(symptom => symptom.replace(/^\s+|\s+$/g, ''));
     this.props.matchSymptoms(symptomsList, this.props.retrievedSymptoms)
+    let matchedSymptoms = []
+    symptomsList.forEach((userSymptom) => {
+      this.props.retrievedSymptoms.forEach((symptom) => {
+        if(userSymptom === symptom.name) {
+          matchedSymptoms.push(symptom.id)
+        }
+      });
+    });
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.props.fetchDoctors('Cardiology', this.props.userDetails.insurance, position.coords.latitude, position.coords.longitude)
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
+    let url = `diagnosis/specialisations?symptoms=${JSON.stringify(matchedSymptoms)}&gender=${this.props.userDetails.sex}&year_of_birth=${this.props.userDetails.yob}`
+    Api.get(url).then(resp => {
+      this.props.saveSpecialty(resp[0].Name)
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.props.fetchDoctors(resp[0].Name, this.props.userDetails.insurance, position.coords.latitude, position.coords.longitude)
+        },
+        (error) => this.setState({ error: error.message }),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      );
+    }).catch( (ex) => {
+        console.log(ex);
+    });
 
     this.props.navigation.navigate('SearchResults')
   }

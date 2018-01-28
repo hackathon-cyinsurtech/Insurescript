@@ -7,3 +7,10 @@ export const userDetails = createReducer({}, {
   },
 
 });
+
+export const selectedSpecialty = createReducer({}, {
+  [types.SET_RETRIEVED_SPECIALTY](state, action) {
+    return action.payload
+  },
+
+});
