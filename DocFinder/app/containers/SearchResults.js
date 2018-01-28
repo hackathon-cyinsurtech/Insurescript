@@ -25,15 +25,18 @@ class SearchResults extends React.Component {
 
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    console.log(this.props.selectedSpecialty)
+    const specialty = this.props.selectedSpecialty;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>You should see a</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>You should see a specialist in {specialty}</Text>
           <Text style={{fontSize: 16, fontWeight: '100'}}>Here are your nearest specialist doctors</Text>
         </View>
         <View style={styles.listContainer}>
           <ListView
             style={styles.listView}
+            enableEmptySections={true}
             renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
             dataSource={ds.cloneWithRows(this.props.retrievedDoctors)}
             renderRow={(rowData) => <ResultRow doctor={rowData} />}

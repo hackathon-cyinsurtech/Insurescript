@@ -44,10 +44,10 @@ class SearchScreen extends React.Component {
 
     let url = `diagnosis/specialisations?symptoms=${JSON.stringify(matchedSymptoms)}&gender=${this.props.userDetails.sex}&year_of_birth=${this.props.userDetails.yob}`
     Api.get(url).then(resp => {
-      this.props.saveSpecialty(resp[0].Name)
+      this.props.saveSpecialty(resp[1].Name)
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          this.props.fetchDoctors(resp[0].Name, this.props.userDetails.insurance, position.coords.latitude, position.coords.longitude)
+          this.props.fetchDoctors(resp[1].Name, this.props.userDetails.insurance, position.coords.latitude, position.coords.longitude)
         },
         (error) => this.setState({ error: error.message }),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
