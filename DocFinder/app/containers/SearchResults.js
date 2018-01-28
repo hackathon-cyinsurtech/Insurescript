@@ -113,13 +113,9 @@ function mapStateToProps(state) {
   return {
     retrievedSymptoms: state.retrievedSymptoms,
     matchedSymptoms: state.matchedSymptoms,
-
-function mapStateToProps(state) {
-  return {
     retrievedDoctors: state.retrievedDoctors,
-    matchedDoctors: state.matchedDoctors,
-  };
-}
+    matchedDoctors: state.matchedDoctors
+};
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
