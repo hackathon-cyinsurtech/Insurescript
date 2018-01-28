@@ -9,6 +9,7 @@ require 'faker'
 SPECIALTIY = ["General practice", "Otolaryngology", "Internal medicine", "Dermatology", "Cardiology"]
 LATITUDES = ["35.164753", "35.162586", "35.143585", "35.16613", "35.160816"]
 LONGITUDES = ["33.37393", "33.37393", "33.33508", "33.374542", "33.35627"]
+INSURANCE = %w{cnp eurolife universal gandirect}
 
 Doctor.create(name: "Dr Andreas Andreou",address: "Ηλίου 265",telephone: "+357 99323250", latitude: "35.164753", longitude: "33.37393", rating: 5, insurance: "eurolife", specialty: "General practice")
 Doctor.create(name: "Dr Andreas Andreou",address: "Ηλίου 265",telephone: "+357 99323250", latitude: "35.164753", longitude: "33.37393", rating: 5, insurance: "gandirect", specialty: "General practice")
@@ -46,3 +47,6 @@ Doctor.create(name: Faker::Name.name, rating: Faker::Number.between(1,5), addres
 Doctor.create(name: Faker::Name.name, rating: Faker::Number.between(1,5), address: "Ρ. Φεραίου 288",telephone: "96 286578", latitude: LATITUDES.sample, longitude: LONGITUDES.sample, specialty: SPECIALTIY.sample, insurance: "gandirect")
 Doctor.create(name: Faker::Name.name, rating: Faker::Number.between(1,5), address: "Ρ. Φεραίου 288",telephone: "96 286578", latitude: LATITUDES.sample, longitude: LONGITUDES.sample, specialty: SPECIALTIY.sample, insurance: "cnp")
 Doctor.create(name: Faker::Name.name, rating: Faker::Number.between(1,5), address: "Ρ. Φεραίου 288",telephone: "96 286578", latitude: LATITUDES.sample, longitude: LONGITUDES.sample, specialty: SPECIALTIY.sample, insurance: "universal")
+400.times do
+  Doctor.create(name: Faker::Name.name,address: Faker::Address.secondary_address, telephone: Faker::PhoneNumber.phone_number, latitude: "35.164753", longitude: "33.37393", rating: 5, insurance: INSURANCE.sample, specialty: SPECIALTIY.sample)
+end

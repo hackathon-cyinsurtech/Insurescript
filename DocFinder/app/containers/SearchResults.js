@@ -59,6 +59,7 @@ class SearchResults extends React.Component {
        <View style={styles.rowContainer}>
          <Text style={{fontSize: 16, fontWeight: 'bold'}}>{this.props.doctor.name}</Text>
          <Text>{this.props.doctor.address}</Text>
+         <Text>{this.props.doctor.telephone}</Text>
          <TouchableOpacity onPress={this.handleDirectionsPress.bind(this)} style={styles.directionsButton}>
            <Text style={{fontSize: 16, color: '#fff', textAlign: 'center'}}>Directions</Text>
            <Text style={{fontSize: 12, color: '#fff', textAlign: 'center'}}>{this.props.doctor.distance}km</Text>
