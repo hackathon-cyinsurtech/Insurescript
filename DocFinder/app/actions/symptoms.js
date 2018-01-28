@@ -11,12 +11,12 @@ export function fetchSymptoms() {
   }
 }
 
-export function fetchDiagnosis(selectedSymptoms, gender, yearOfBirth) {
+export function fetchSpecialty(selectedSymptoms, gender, yearOfBirth) {
   let symptoms = selectedSymptoms.split(',');
   let url = `${this.config.getAPIURL()}/diagnosis/specialisations?symptoms=` + JSON.stringify(symptoms) + `&gender=${gender}&year_of_birth=${yearOfBirth}`;
   return (dispatch, getState) => {
     return Api.get(url).then(resp => {
-      dispatch(setRetrievedDiagnosis({diagnosis: resp}));
+      dispatch(setRetrievedSpecialty({diagnosis: resp}));
     }).catch( (ex) => {
       console.log(ex);
     });
@@ -38,10 +38,18 @@ export function matchSymptoms(userSymptoms, symptomsList) {
   }
 }
 
-export function setRetrievedDiagnosis( { diagnosis }){
+export function setRetrievedSpecialty( { specialties }){
+  let maxDiagnosisAccuracy = 0.0
+  let selectedSpecialty = 'General Practitioner'
+  specialties.forEach( (specialty) => {
+    if (specialty.accuracy > maxDiagnosisAccuracy) {
+      maxSpecialtyAccuracy = specialty.accuracy
+      selectedSpecialty = specialty.name
+    }
+  })
   return {
-    type: types.SET_RETRIEVED_DIAGNOSIS,
-    diagnosis:
+    type: types.SET_RETRIEVED_SPECIALTY,
+    specialty: selectedSpecialty
   }
 }
 

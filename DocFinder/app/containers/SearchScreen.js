@@ -32,7 +32,7 @@ class SearchScreen extends React.Component {
     }
     let symptomsList = this.state.currentText.split(',').map(symptom => symptom.replace(/^\s+|\s+$/g, ''));
     this.props.matchSymptoms(symptomsList, this.props.retrievedSymptoms)
-    this.props.fetchDiagnosis(this.state.matchedSymptoms, this.state.dob, this.state.gender)
+    this.props.fetchSpecialty(this.state.matchedSymptoms, this.state.gendedr, this.state.dob)
     this.props.navigation.navigate('SearchResults')
   }
 
@@ -91,7 +91,8 @@ function mapStateToProps(state) {
   return {
     userDetails: state.userDetails,
     retrievedSymptoms: state.retrievedSymptoms,
-    matchedSymptoms: state.matchedSymptoms,
+    matchedSymptoms: state.matchedSymptoms
+    matchedSpecialty: state.matchedSpecialty
   };
 }
 
