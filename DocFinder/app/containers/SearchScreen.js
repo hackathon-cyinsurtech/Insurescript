@@ -32,7 +32,15 @@ class SearchScreen extends React.Component {
     }
     let symptomsList = this.state.currentText.split(',').map(symptom => symptom.replace(/^\s+|\s+$/g, ''));
     this.props.matchSymptoms(symptomsList, this.props.retrievedSymptoms)
-    this.props.fetchSpecialty(this.state.matchedSymptoms, this.state.gendedr, this.state.dob)
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.props.fetchDoctors('Cardiology', this.props.userDetails.insurance, position.coords.latitude, position.coords.longitude)
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
+
     this.props.navigation.navigate('SearchResults')
   }
 
@@ -87,7 +95,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     userDetails: state.userDetails,
     retrievedSymptoms: state.retrievedSymptoms,

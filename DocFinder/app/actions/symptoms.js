@@ -12,7 +12,7 @@ export function fetchSymptoms() {
 }
 
 export function fetchSpecialty(selectedSymptoms, gender, yearOfBirth) {
-  let symptoms = selectedSymptoms.split(',');
+  let symptoms = selectedSymptoms.map(symptom => symptom.id)
   let url = `diagnosis/specialisations?symptoms=` + JSON.stringify(symptoms) + `&gender=${gender}&year_of_birth=${yearOfBirth}`;
   return (dispatch, getState) => {
     return Api.get(url).then(resp => {
@@ -22,7 +22,6 @@ export function fetchSpecialty(selectedSymptoms, gender, yearOfBirth) {
     });
   }
 }
-
 
 export function matchSymptoms(userSymptoms, symptomsList) {
   return (dispatch, getState) => {

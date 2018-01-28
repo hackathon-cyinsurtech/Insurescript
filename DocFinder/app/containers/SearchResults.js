@@ -15,20 +15,23 @@ class SearchResults extends React.Component {
   constructor(props) {
     super(props)
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
-      specialty: 'cardiologist',
-      doctors: ds.cloneWithRows([
-        {id: 2, name: 'Dr. George Kyriakou', address: '30 Ipparxou Str', rating: 4, latitude: 35.162586, longitude: 33.373931},
-        {id: 3, name: 'Dr. Andy Sols', rating: 5, address: '12 Erasmus Str', latitude: 35.162586, longitude: 33.373931}
-      ])
+      specialty: 'Cardiology',
     }
+
+
   }
+
+  componentWillReceiveProps(nextProps) {
+  }
+
   handleSearchClick() {
     this.props.navigation.navigate('SearchResults')
   }
 
   render() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -39,7 +42,7 @@ class SearchResults extends React.Component {
           <ListView
             style={styles.listView}
             renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-            dataSource={this.state.doctors}
+            dataSource={ds.cloneWithRows(this.props.retrievedDoctors)}
             renderRow={(rowData) => <ResultRow doctor={rowData} />}
           />
         </View>
